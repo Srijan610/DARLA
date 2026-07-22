@@ -1,0 +1,21 @@
+﻿# Secret keys
+.env
+
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated audio
+*.mp3
+
+# Temporary model list
+models.txt
+
+# Personal DARLA memories
+memory/memory.json
+
+# VS Code settings
+.vscode/
