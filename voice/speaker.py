@@ -1,19 +1,22 @@
-import pyttsx3
+import asyncio
+import edge_tts
+from playsound import playsound
+import os
+import uuid
 
-engine = pyttsx3.init()
+VOICE = "en-US-AriaNeural"
 
-engine.setProperty("rate", 170)
-
-voices = engine.getProperty("voices")
-
-# Select a female voice if available
-for voice in voices:
-    if "female" in voice.name.lower():
-        engine.setProperty("voice", voice.id)
-        break
-
+async def generate_voice(text, filename):
+    communicate = edge_tts.Communicate(text, VOICE)
+    await communicate.save(filename)
 
 def speak(text):
     print(f"DARLA: {text}")
-    engine.say(text)
-    engine.runAndWait()
+
+    filename = f"{uuid.uuid4()}.mp3"
+
+    asyncio.run(generate_voice(text, filename))
+
+    playsound(filename)
+
+    os.remove(filename)
